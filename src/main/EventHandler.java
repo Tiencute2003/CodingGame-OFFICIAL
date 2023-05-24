@@ -58,7 +58,7 @@ public class EventHandler {
         
         eventMaster.dialogues[0][0] = "You fall into a pit!";
         
-        eventMaster.dialogues[1][0] = "You drink the water.\nYour life and mana has been recovered to fullest.";
+        eventMaster.dialogues[1][0] = "Your life and mana has been recovered to fullest.";
     }
     
     public void checkEvent(){
@@ -75,18 +75,27 @@ public class EventHandler {
             if(hit(0,24,16,"right") == true) { damagePit(gp.dialogueState); }
             if(hit(0,26,16,"right") == true) { damagePit(gp.dialogueState); }
             //else if(hit(0,23,19,"any") == true) { damagePit(gp.dialogueState); }
+            else if(hit(3,22,8,"any") == true) { healingPool(gp.dialogueState); }
+            else if(hit(3,23,8,"any") == true) { healingPool(gp.dialogueState); }
+            else if(hit(3,24,8,"any") == true) { healingPool(gp.dialogueState); }
+            
+            else if(hit(2,3,16,"any") == true) { healingPool(gp.dialogueState); }
+            else if(hit(2,4,16,"any") == true) { healingPool(gp.dialogueState); }
+            else if(hit(2,5,16,"any") == true) { healingPool(gp.dialogueState); }
+            
             else if(hit(0,23,12,"any") == true) { healingPool(gp.dialogueState); }
             else if(hit(0,10,39,"any") == true) { teleport(1,12,13); }
             else if(hit(1,12,13,"any") == true) { teleport(0,10,39); }
             else if(hit(1,12,9,"up") == true) { speak(gp.npc[1][0]);}
             else if(hit(0,12,9,"any") == true) { teleport(2,3,10); }
+//            else if(hit(0,12,9,"any") == true) { teleport(3,22,5); }//thay the
             else if(hit(2,3,10,"any") == true) { teleport(0,12,9); }
             else if(hit(2,24,4,"any") == true) { teleport(2,25,40); }
             else if(hit(2,25,40,"any") == true) { teleport(2,24,4); }
             else if(hit(2,25,4,"any") == true) { teleport(2,26,40); }
             else if(hit(2,26,40,"any") == true) { teleport(2,25,4); }
-            else if(hit(2,22,44,"any") == true) { teleport(3,26,5); }
-            else if(hit(3,26,5,"any") == true) { teleport(2,22,44); }
+            else if(hit(2,22,44,"any") == true) { teleport(3,22,5); }
+            else if(hit(3,22,5,"any") == true) { teleport(2,22,44); }
         }
     }
     
