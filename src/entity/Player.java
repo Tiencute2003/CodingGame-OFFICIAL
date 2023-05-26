@@ -51,9 +51,6 @@ public class Player extends Entity {
 
         
         setDefaultValues();
-        getPlayerImage();
-        getPlayerAttackImage();
-        setItems();
         
     } 
     public void setDefaultValues(){
@@ -81,8 +78,9 @@ public class Player extends Entity {
         defense = getDefense(); // total defense is decided by dexterity * shield
         
         setDialogue();
-        
-        
+        getPlayerImage();
+        getPlayerAttackImage();
+        setItems();
     }
     
     public void setDefaultPositions(){
@@ -97,11 +95,14 @@ public class Player extends Entity {
         dialogues[0][0] = "You are level " + level + " now!\nYou feel stronger!";
     }
     
-    public void restoreLifeAndMana(){
+    public void restoreStatus(){
         
         life = maxLife;
         mana = maxMana;
         invincible = false;
+        attacking = false;
+//        guarding = false;
+        knockBack = false;
     }
     
     public void setItems(){

@@ -11,6 +11,7 @@ import main.GamePanel;
  *
  * @author tranbachtung
  */
+//neu muon lam open chest thi bat 53/64 - 25:20s va video 44
 public class OBJ_Chest extends Entity{
     
     public OBJ_Chest(GamePanel gp){

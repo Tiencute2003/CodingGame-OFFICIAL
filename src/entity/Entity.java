@@ -58,6 +58,7 @@ public class Entity {
     int knockBackCounter = 0;
     
     // CHARACTER ATTRIBUTES
+    public String amount;
     public String name;
     public int defaultSpeed;
     public int speed;
@@ -537,10 +538,10 @@ public class Entity {
         int nextWorldY = user.getTopY();
         
         switch(user.direction){
-            case "up": nextWorldY = user.getTopY()-1; break;
-            case "down": nextWorldY = user.getBottomY()+1; break;
-            case "left": nextWorldX = user.getLeftX()-1; break;
-            case "right": nextWorldX = user.getRightX()+1; break;
+            case "up": nextWorldY = user.getTopY()-gp.player.speed; break;
+            case "down": nextWorldY = user.getBottomY()+gp.player.speed; break;
+            case "left": nextWorldX = user.getLeftX()-gp.player.speed; break;
+            case "right": nextWorldX = user.getRightX()+gp.player.speed; break;
         }
         int col = nextWorldX/gp.tileSize;
         int row = nextWorldY/gp.tileSize;

@@ -58,7 +58,7 @@ public class EventHandler {
         
         eventMaster.dialogues[0][0] = "You fall into a pit!";
         
-        eventMaster.dialogues[1][0] = "Your life and mana has been recovered to fullest.";
+        eventMaster.dialogues[1][0] = "Your life and mana has been recovered to fullest.\nThe progress has been saved";
     }
     
     public void checkEvent(){
@@ -149,6 +149,7 @@ public class EventHandler {
             // one-time-only event
             //eventRect[col][row].eventDone = true;
             gp.aSetter.setMonster();
+            gp.saveLoad.save();
         }
     }
     

@@ -5,6 +5,7 @@
 package main;
 
 import ai.PathFinder;
+import ai.data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import java.awt.Color;
@@ -63,6 +64,7 @@ public class GamePanel extends JPanel implements Runnable{
     public EventHandler eHandler = new EventHandler(this);
     Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
+    SaveLoad saveLoad = new SaveLoad(this);
     Thread gameThread; 
     
     // ENTITY AND OBJECT
@@ -109,23 +111,17 @@ public class GamePanel extends JPanel implements Runnable{
         }
         
     }
-    
-    public void retry(){
-        
+    public void resetGame(boolean restart){
         player.setDefaultPositions();
-        player.restoreLifeAndMana();
+        player.restoreStatus();
         aSetter.setNPC();
         aSetter.setMonster();
-    }
-    
-    public void restart(){
         
+        if(restart == true){
         player.setDefaultValues();
-        player.restoreLifeAndMana();
-        player.setItems();
         aSetter.setObject();
-        aSetter.setNPC();
-        aSetter.setMonster();
+        //aSetter.setInteractiveTile(); 4:27/53
+        }
     }
     
     public void setFullScreen(){
