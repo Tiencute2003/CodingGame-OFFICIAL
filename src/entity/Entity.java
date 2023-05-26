@@ -58,7 +58,6 @@ public class Entity {
     int knockBackCounter = 0;
     
     // CHARACTER ATTRIBUTES
-    public String amount;
     public String name;
     public int defaultSpeed;
     public int speed;
@@ -87,6 +86,9 @@ public class Entity {
     public String description = "";
     public int useCost;
     public int price;
+    public int amount = 1;
+    public boolean stackable = false;
+    
     
     // TYPE
     public int type; // 0 = player, 1 = npc, 2 = monster
