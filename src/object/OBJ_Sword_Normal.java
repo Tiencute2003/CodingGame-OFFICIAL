@@ -23,6 +23,7 @@ public class OBJ_Sword_Normal extends Entity{
         attackArea.width = 38;
         attackArea.height = 38;
         description = "[ " + name + " ]\nAn old sword.";
+        knockBackPower = 3;
         
     }
 }

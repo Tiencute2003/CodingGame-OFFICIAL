@@ -54,7 +54,7 @@ public class Player extends Entity {
         
     } 
     public void setDefaultValues(){
-        worldX = gp.tileSize *37;//11;
+        worldX = gp.tileSize *37;
         worldY = gp.tileSize *8;
         defaultSpeed = 4;
         speed = defaultSpeed;
@@ -285,49 +285,6 @@ public class Player extends Entity {
         
     }
     
-    public void attacking(){
-        
-        spriteCounter++;
-        if(spriteCounter <= 5){
-            spriteNum = 1;
-        }
-        if(spriteCounter > 5 && spriteCounter <= 25){
-            spriteNum = 2;
-            
-            // Save the current worldX, worldY, solidArea
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int solidAreaWidth = solidArea.width;
-            int solidAreaHeight = solidArea.height;
-            
-            // Adjust player's worldX/Y for the attack area
-            switch(direction){
-                case "up": worldY -= attackArea.height; break;
-                case "down": worldY += attackArea.height; break;
-                case "left": worldX -= attackArea.width; break;
-                case "right": worldX += attackArea.width; break;
-            }
-            // AttackArea becomes solidArea
-            solidArea.width = attackArea.width;
-            solidArea.height = attackArea.height;
-            // Check monster collision with the updated worldX/Y and solidArea
-            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            damageMonster(monsterIndex, attack);
-            
-            // After checking collision, restore the original data
-            worldX = currentWorldX;
-            worldY = currentWorldY;
-            solidArea.width = solidAreaWidth;
-            solidArea.height = solidAreaHeight;
-            
-        }
-        if(spriteCounter > 25){
-            spriteNum = 1;
-            spriteCounter = 0;
-            attacking = false;
-        }
-    }
-    
     public void pickUpObject(int i){
         
         if(i != 999){
@@ -394,15 +351,16 @@ public class Player extends Entity {
         }
     }
     
-    public void damageMonster(int i, int attack){
+    public void damageMonster(int i, Entity attacker, int attack, int knockBackPower){
         if(i != 999){
             
             if (gp.monster[gp.currentMap][i].invincible == false){
                 
                 gp.playSE(5);
                 
-                knockBack(gp.monster[gp.currentMap][i]);
-                
+                if(knockBackPower > 0){
+                setKnockBack(gp.monster[gp.currentMap][i],attacker,knockBackPower);
+                }
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
                 if(damage < 0){
                     damage = 0;
@@ -423,11 +381,6 @@ public class Player extends Entity {
                 }
             }
         }
-    }
-    public void knockBack(Entity entity){
-        entity.direction = direction;
-        entity.speed +=10;
-        entity.knockBack = true;
     }
     
     public void checkLevelUp(){
