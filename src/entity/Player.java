@@ -54,7 +54,9 @@ public class Player extends Entity {
         
     } 
     public void setDefaultValues(){
-        worldX = gp.tileSize *37;
+        
+        gp.currentMap = 0;
+        worldX = gp.tileSize *11;
         worldY = gp.tileSize *8;
         defaultSpeed = 4;
         speed = defaultSpeed;
@@ -103,6 +105,7 @@ public class Player extends Entity {
         life = maxLife;
         mana = maxMana;
         invincible = false;
+        transparent = false;
         attacking = false;
         guarding = false;
         knockBack = false;
@@ -114,6 +117,7 @@ public class Player extends Entity {
         inventory.add(currentWeapon);
         inventory.add(currentShield);
     }
+
     
     public int getAttack(){
         attackArea = currentWeapon.attackArea;
@@ -123,7 +127,7 @@ public class Player extends Entity {
     public int getDefense(){
         return defense = dexterity + currentShield.defenseValue;
     }
-    
+
     public void getImage(){
         
         up1 = setup("/player/boy_up_1", gp.tileSize, gp.tileSize);
@@ -212,6 +216,7 @@ public class Player extends Entity {
         }  
         else if (keyH.spacePressed == true){
             guarding = true;
+            guardCounter++;
         }
         else if (keyH.upPressed == true || keyH.downPressed == true || keyH.leftPressed == true || keyH.rightPressed == true || keyH.enterPressed == true){
             if (keyH.upPressed == true){
@@ -266,6 +271,7 @@ public class Player extends Entity {
         attackCanceled = false;
         gp.keyH.enterPressed = false;
         guarding = false;
+        guardCounter = 0;
             
         spriteCounter++;
         if (spriteCounter > 10){
@@ -285,6 +291,7 @@ public class Player extends Entity {
                 standCounter = 0;
             }
             guarding = false;
+            guardCounter = 0;
         }
         
         if(gp.keyH.shotKeyPressed == true && projectile.alive == false 
@@ -310,6 +317,7 @@ public class Player extends Entity {
             invincibleCounter++;
             if(invincibleCounter > 60){
                 invincible = false;
+                transparent = false;
                 invincibleCounter = 0;
             }
             
@@ -326,14 +334,14 @@ public class Player extends Entity {
         if(mana > maxMana){
             mana = maxMana;
         }
-        
-        if(life <= 0){
-            gp.gameState = gp.gameOverState;
-            gp.ui.commandNum = -1;
-            gp.stopMusic();
-            gp.playSE(11);
+        if (keyH.godModeOn == false){
+            if(life <= 0){
+                gp.gameState = gp.gameOverState;
+                gp.ui.commandNum = -1;
+                gp.stopMusic();
+                gp.playSE(11);
+            }
         }
-        
     }
     
     public void pickUpObject(int i){
@@ -392,12 +400,13 @@ public class Player extends Entity {
                 gp.playSE(6);
                 
                 int damage = gp.monster[gp.currentMap][i].attack - defense;
-                if(damage < 0){
-                    damage = 0;
+                if(damage < 1){
+                    damage = 1;
                 }
                 
-                life -= damage;
+                life -= damage; 
                 invincible = true;
+                transparent = true;
             }            
         }
     }
@@ -412,6 +421,11 @@ public class Player extends Entity {
                 if(knockBackPower > 0){
                 setKnockBack(gp.monster[gp.currentMap][i],attacker,knockBackPower);
                 }
+                
+                if(gp.monster[gp.currentMap][i].offBalance == true){
+                    attack *= 5;
+                }
+                
                 int damage = attack - gp.monster[gp.currentMap][i].defense;
                 if(damage < 0){
                     damage = 0;
@@ -441,8 +455,12 @@ public class Player extends Entity {
             level++;
             nextLevelExp = nextLevelExp * 2 + 5;
             maxLife += 2;
+            maxMana ++;
             strength++;
             dexterity++;
+            if(level/3 == 0){
+            defaultSpeed++;
+            }
             attack = getAttack();
             defense = getDefense();
             
@@ -588,7 +606,7 @@ public class Player extends Entity {
                 break;
         }
         
-        if(invincible == true){
+        if(transparent == true){
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
         

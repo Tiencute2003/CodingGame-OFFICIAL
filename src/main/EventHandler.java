@@ -85,9 +85,9 @@ public class EventHandler {
             
             else if(hit(0,23,12,"any") == true) { healingPool(gp.dialogueState); }
             else if(hit(0,10,39,"any") == true) { teleport(1,12,13); }
-            else if(hit(1,12,13,"any") == true) { teleport(0,10,39); }
-            else if(hit(1,12,9,"up") == true) { speak(gp.npc[1][0]);}
-            else if(hit(0,12,9,"any") == true) { teleport(2,3,10); }
+//            else if(hit(1,12,13,"any") == true) { teleport(0,10,39); }
+//            else if(hit(1,12,9,"up") == true) { speak(gp.npc[1][0]);}
+            else if(hit(0,12,9,"any") == true) { teleport(5,34,23); }
 //            else if(hit(0,12,9,"any") == true) { teleport(3,22,5); }//thay the
             else if(hit(2,3,10,"any") == true) { teleport(0,12,9); }
             else if(hit(2,24,4,"any") == true) { teleport(2,25,40); }

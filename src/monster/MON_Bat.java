@@ -4,6 +4,14 @@
  */
 package monster;
 
+/**
+ *
+ * @author trinh
+ */
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 import entity.Entity;
 import java.util.Random;
 import main.GamePanel;
@@ -16,22 +24,22 @@ import object.OBJ_Rock;
  *
  * @author tranbachtung
  */
-public class MON_GreenSlime extends Entity{
+public class MON_Bat extends Entity{
     
     GamePanel gp;
     
-    public MON_GreenSlime(GamePanel gp) {
+    public MON_Bat(GamePanel gp) {
         super(gp);
         this.gp = gp;
         type = type_monster;
-        name = "Green Slime";
-        defaultSpeed = 1;
+        name = "Bat";
+        defaultSpeed = 5;
         speed = defaultSpeed;
-        maxLife = 4;
+        maxLife = 6;
         life = maxLife;
-        attack = 5;
+        attack = 4;
         defense = 0;
-        exp = 2;
+        exp = 5;
         projectile = new OBJ_Rock(gp);
         
         solidArea.x = 3;
@@ -46,38 +54,37 @@ public class MON_GreenSlime extends Entity{
     
     public void getImage(){
         
-        up1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        up2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        down1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        down2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        left1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        left2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
-        right1 = setup("/monster/greenslime_down_1", gp.tileSize, gp.tileSize);
-        right2 = setup("/monster/greenslime_down_2", gp.tileSize, gp.tileSize);
+        up1 = setup("/monster/bat_down_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/monster/bat_down_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/monster/bat_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/monster/bat_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/monster/bat_down_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/monster/bat_down_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/monster/bat_down_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/monster/bat_down_2", gp.tileSize, gp.tileSize);
     }
     
     public void setAction(){
         
         if(onPath == true){
-            checkStopChasingOrNot(gp.player, 15, 100);           
-            //SEARCH THE DIRECTION TO GO 
-            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
-            //CHECK IF IT SHOOTS A PROJECTILE
-            checkShootOrNot(200, 30);
+//            checkStopChasingOrNot(gp.player, 15, 100);           
+//            //SEARCH THE DIRECTION TO GO 
+//            searchPath(getGoalCol(gp.player), getGoalRow(gp.player));
+//            //CHECK IF IT SHOOTS A PROJECTILE
+//            checkShootOrNot(200, 30);
         }
         else{
-            checkStartChasingOrNot(gp.player, 5, 100); 
+//            checkStartChasingOrNot(gp.player, 5, 100); 
             
-            getRandomDirection(120);
+            getRandomDirection(40);
         }
         
     }
     
     public void damageReaction(){
-        
-        direction= gp.player.direction;
+//        direction= gp.player.direction;
         actionLockCounter = 0;
-        onPath = true;
+//        onPath = true;
     }
     
     public void checkDrop(){
@@ -97,3 +104,4 @@ public class MON_GreenSlime extends Entity{
         }
     }
 }
+

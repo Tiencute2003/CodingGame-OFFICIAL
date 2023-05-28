@@ -87,6 +87,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int gameOverState = 6;
     public final int tradeState = 7;
     
+    
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
@@ -292,6 +293,7 @@ public class GamePanel extends JPanel implements Runnable{
             g2.drawString("Col: " + (player.worldX + player.solidArea.x)/tileSize, x, y); y += lineHeight;
             g2.drawString("Row: " + (player.worldY + player.solidArea.y)/tileSize, x, y); y += lineHeight;
             g2.drawString("Draw Time: "+passed,x,y);
+            g2.drawString("God Mode:" + keyH.godModeOn ,x,y);
         }
         
     }

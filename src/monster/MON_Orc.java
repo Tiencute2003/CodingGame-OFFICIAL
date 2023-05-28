@@ -29,8 +29,8 @@ public class MON_Orc extends Entity{
         speed = defaultSpeed;
         maxLife = 10;
         life = maxLife;
-        attack = 4;
-        defense = 5;
+        attack = 8;
+        defense = 4;
         exp = 10;
         knockBackPower = 5;
         
@@ -83,7 +83,7 @@ public class MON_Orc extends Entity{
         else{
             checkStartChasingOrNot(gp.player, 5, 100); 
             
-            getRandomDirection();
+            getRandomDirection(120);
         }
         
         // Check if it attacks
@@ -93,7 +93,7 @@ public class MON_Orc extends Entity{
     }
     
     public void damageReaction(){
-        
+        direction= gp.player.direction;
         actionLockCounter = 0;
         onPath = true;
     }

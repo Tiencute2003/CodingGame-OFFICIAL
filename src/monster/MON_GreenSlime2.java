@@ -1,5 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package monster;
-
 
 import entity.Entity;
 import java.util.Random;
@@ -9,36 +12,32 @@ import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
 import object.OBJ_Rock;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
  *
  * @author trinh
  */
-public class MON_GreySkeleton extends Entity{
+public class MON_GreenSlime2 extends Entity{
+    
     GamePanel gp;
     
-    public MON_GreySkeleton(GamePanel gp) {
+    public MON_GreenSlime2(GamePanel gp) {
         super(gp);
         this.gp = gp;
         type = type_monster;
-        name = "Grey Skeleton";
+        name = "Green Slime 2";
         defaultSpeed = 2;
         speed = defaultSpeed;
-        maxLife = 6;
+        maxLife = 15;
         life = maxLife;
-        attack = 7;
-        defense = 2;
-        exp = 3;
+        attack = 8;
+        defense = 5;
+        exp = 12;
         projectile = new OBJ_Rock(gp);
         
         solidArea.x = 3;
         solidArea.y = 18;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.width = 40;
+        solidArea.height = 45;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         
@@ -47,14 +46,14 @@ public class MON_GreySkeleton extends Entity{
     
     public void getImage(){
         
-        up1 = setup("/monster/l0_sprite_064", gp.tileSize, gp.tileSize);
-        up2 = setup("/monster/l0_sprite_065", gp.tileSize, gp.tileSize);
-        down1 = setup("/monster/l0_sprite_055", gp.tileSize, gp.tileSize);
-        down2 = setup("/monster/l0_sprite_056", gp.tileSize, gp.tileSize);
-        left1 = setup("/monster/l0_sprite_061", gp.tileSize, gp.tileSize);
-        left2 = setup("/monster/l0_sprite_062", gp.tileSize, gp.tileSize);
-        right1 = setup("/monster/l0_sprite_058", gp.tileSize, gp.tileSize);
-        right2 = setup("/monster/l0_sprite_059", gp.tileSize, gp.tileSize);
+        up1 = setup("/monster/greenslime2_down_1", gp.tileSize, gp.tileSize);
+        up2 = setup("/monster/greenslime2_down_2", gp.tileSize, gp.tileSize);
+        down1 = setup("/monster/greenslime2_down_1", gp.tileSize, gp.tileSize);
+        down2 = setup("/monster/greenslime2_down_2", gp.tileSize, gp.tileSize);
+        left1 = setup("/monster/greenslime2_down_1", gp.tileSize, gp.tileSize);
+        left2 = setup("/monster/greenslime2_down_2", gp.tileSize, gp.tileSize);
+        right1 = setup("/monster/greenslime2_down_1", gp.tileSize, gp.tileSize);
+        right2 = setup("/monster/greenslime2_down_2", gp.tileSize, gp.tileSize);
     }
     
     public void setAction(){
@@ -69,13 +68,14 @@ public class MON_GreySkeleton extends Entity{
         else{
             checkStartChasingOrNot(gp.player, 5, 100); 
             
-            getRandomDirection();
+            getRandomDirection(120);
         }
         
     }
     
     public void damageReaction(){
         
+        direction= gp.player.direction;
         actionLockCounter = 0;
         onPath = true;
     }
@@ -97,3 +97,4 @@ public class MON_GreySkeleton extends Entity{
         }
     }
 }
+
