@@ -25,7 +25,8 @@ public class Entity {
     GamePanel gp;
           
     public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2,
+            guardUp,guardDown,guardLeft,guardRight;
     public BufferedImage image, image2, image3;
     public Rectangle solidArea = new Rectangle(0,0,48,48);
     public Rectangle attackArea = new Rectangle(0,0,0,0);
@@ -49,6 +50,7 @@ public class Entity {
     public boolean onPath = false;
     public boolean knockBack = false;
     public String knockBackDirection;
+    public boolean guarding = false;
     
     // COUNTER
     public int spriteCounter = 0;
@@ -75,6 +77,8 @@ public class Entity {
     public int exp;
     public int nextLevelExp;
     public int coin;
+    public int motion1_duration;
+    public int motion2_duration;
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
@@ -378,6 +382,16 @@ public class Entity {
             
             }
     }
+    public String getOppositeDirection(String direction){
+        String oppositeDirection = "";
+        switch(direction){
+            case "up": oppositeDirection = "down";break;
+            case "down": oppositeDirection = "up";break;
+            case "left": oppositeDirection = "right";break;
+            case "right": oppositeDirection = "left";break;
+        }
+        return oppositeDirection;
+    }
     public void setKnockBack(Entity target, Entity attacker, int knockBackPower){
         
         this.attacker = attacker;
@@ -388,10 +402,10 @@ public class Entity {
     public void attacking(){
         
         spriteCounter++;
-        if(spriteCounter <= 5){
+        if(spriteCounter <= motion1_duration){
             spriteNum = 1;
         }
-        if(spriteCounter > 5 && spriteCounter <= 25){
+        if(spriteCounter > motion1_duration && spriteCounter <= motion2_duration){
             spriteNum = 2;
             
             // Save the current worldX, worldY, solidArea
@@ -427,7 +441,7 @@ public class Entity {
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;   
         }
-        if(spriteCounter > 25){
+        if(spriteCounter > motion2_duration){
             spriteNum = 1;
             spriteCounter = 0;
             attacking = false;
@@ -437,12 +451,24 @@ public class Entity {
     public void damagePlayer(int attack){
         if(gp.player.invincible == false){
                 // we can give damage
-                gp.playSE(6);
-                
                 int damage = attack - gp.player.defense;
-                if(damage < 0){
+                // Get an opposite direction of this attacker
+                String canGuardDirection = getOppositeDirection(direction);
+                if (gp.player.guarding == true && gp.player.direction.equals(canGuardDirection)) {
                     damage = 0;
-                }   
+                    gp.playSE(13);
+                }
+                else {
+                    // NOT GUARDING
+                    gp.playSE(6);
+                    if (damage < 1){
+                        damage = 1;
+                    }
+                    
+                }
+                if (damage != 0){
+                    setKnockBack(gp.player, this, knockBackPower);
+                }
                 gp.player.life -= damage;
                 
                 gp.player.invincible = true;

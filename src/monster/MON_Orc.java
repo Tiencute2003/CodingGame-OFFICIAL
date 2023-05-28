@@ -29,9 +29,10 @@ public class MON_Orc extends Entity{
         speed = defaultSpeed;
         maxLife = 10;
         life = maxLife;
-        attack = 8;
+        attack = 4;
         defense = 5;
         exp = 10;
+        knockBackPower = 5;
         
         solidArea.x = 4;
         solidArea.y = 4;
@@ -41,6 +42,8 @@ public class MON_Orc extends Entity{
         solidAreaDefaultY = solidArea.y;
         attackArea.width=48;
         attackArea.height=48;
+        motion1_duration = 40;
+        motion2_duration = 85;
         
         
         getImage();
@@ -85,7 +88,7 @@ public class MON_Orc extends Entity{
         
         // Check if it attacks
         if(attacking == false) {
-            checkAttackOrNot(100, gp.tileSize*4, gp.tileSize);
+            checkAttackOrNot(30, gp.tileSize*4, gp.tileSize);
         }
     }
     
