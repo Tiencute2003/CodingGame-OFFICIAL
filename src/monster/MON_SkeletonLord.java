@@ -25,13 +25,14 @@ public class MON_SkeletonLord extends Entity{
         super(gp);
         this.gp = gp;
         type = type_monster;
+        boss = true;
         name = monName;
         defaultSpeed = 1;
         speed = defaultSpeed;
         maxLife = 100;
         life = maxLife;
-        attack = 15;
-        defense = 5;
+        attack = 1;
+        defense = 0;
         exp = 100;
         knockBackPower = 5;
         

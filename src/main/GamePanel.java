@@ -87,6 +87,13 @@ public class GamePanel extends JPanel implements Runnable{
     public final int gameOverState = 6;
     public final int tradeState = 7;
     
+    // AREA
+    public int currentArea;
+    public int nextArea;
+    public final int outside = 50;
+    public final int cave = 51;
+    public final int lava = 52;
+    public final int boss = 53;
     
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -103,6 +110,7 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setMonster();
 //        playMusic(0);
         gameState = titleState;
+        currentArea = outside;
         
         tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB_PRE);
         g2 = (Graphics2D)tempScreen.getGraphics();
@@ -318,4 +326,18 @@ public class GamePanel extends JPanel implements Runnable{
         se.setFile(i);
         se.play();
     }
+//    public void changeArea(){
+//        currentArea = nextArea;
+//        if(nextArea != currentArea){
+//            stopMusic();
+//            if (nextArea == outside){
+//                playMusic(0);
+//            }
+//            if (nextArea == cave ) {
+//                playMusic(16);
+//            }
+//        }
+//        currentArea = nextArea;
+//        aSetter.setMonster();
+//    }
 }
