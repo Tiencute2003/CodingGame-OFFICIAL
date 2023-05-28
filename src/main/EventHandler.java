@@ -4,6 +4,7 @@
  */
 package main;
 
+import ai.data.Progress;
 import entity.Entity;
 
 
@@ -83,19 +84,31 @@ public class EventHandler {
             else if(hit(2,4,16,"any") == true) { healingPool(gp.dialogueState); }
             else if(hit(2,5,16,"any") == true) { healingPool(gp.dialogueState); }
             
-            else if(hit(0,23,12,"any") == true) { healingPool(gp.dialogueState); }
-//            else if(hit(0,10,39,"any") == true) { teleport(1,12,13,); }
+            else if(hit(0,24,22,"any") == true) { healingPool(gp.dialogueState); }
+            else if(hit(0,12,32,"any") == true) { teleport(1,12,13); }
 //            else if(hit(1,12,13,"any") == true) { teleport(0,10,39); }
 //            else if(hit(1,12,9,"up") == true) { speak(gp.npc[1][0]);}
-            else if(hit(0,12,9,"any") == true) { teleport(5,34,23); }
-//            else if(hit(0,12,9,"any") == true) { teleport(3,22,5); }//thay the
-            else if(hit(2,3,10,"any") == true) { teleport(0,12,9); }
+            else if(hit(0,5,4,"any") == true) { teleport(2,26,5); }
+            else if(hit(2,26,5,"any") == true) { teleport(0,5,4); }
             else if(hit(2,24,4,"any") == true) { teleport(2,25,40); }
             else if(hit(2,25,40,"any") == true) { teleport(2,24,4); }
             else if(hit(2,25,4,"any") == true) { teleport(2,26,40); }
             else if(hit(2,26,40,"any") == true) { teleport(2,25,4); }
-            else if(hit(2,22,44,"any") == true) { teleport(3,22,5); }
-            else if(hit(3,22,5,"any") == true) { teleport(2,22,44); }
+            else if(hit(2,22,44,"any") == true) { teleport(3,25,5); }
+            else if(hit(3,25,5,"any") == true) { teleport(2,22,44); }
+            else if(hit(3,22,44,"any") == true) { teleport(3,25,5); }
+            
+            
+            else if(hit(3,11,44,"any") == true) { teleport(5,25,34); }
+            else if(hit(5,25,34,"any") == true) { teleport(3,11,44); }
+            else if(hit(3,12,44,"any") == true) { teleport(5,26,34); }
+            else if(hit(5,26,34,"any") == true) { teleport(3,12,44); }
+            
+            else if(hit(5,26,24,"up") == true) {skeletonLord();}//BOSS
+            
+            else if(hit(5,25,6,"any") == true) { teleport(4,26,40); }
+            
+            else if(hit(5,26,6,"any") == true) { teleport(4,26,40); }
         }
     }
     
@@ -168,8 +181,14 @@ public class EventHandler {
         
         if(gp.keyH.enterPressed == true){
             gp.gameState = gp.dialogueState;
-            gp.player.attackCanceled = true;
+        gp.player.attackCanceled = true;
             entity.speak();
+        }
+    }
+    public void skeletonLord (){
+        if(gp.bossBattleOn == false && Progress.skeletonLordDefeated == false){
+            gp.gameState = gp.cutscenceState;
+            gp.csManager.sceneNum = gp.csManager.skeletonLord;
         }
     }
 }

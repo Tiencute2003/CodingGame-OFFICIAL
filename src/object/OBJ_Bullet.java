@@ -23,7 +23,7 @@ public class OBJ_Bullet extends Projectile{
         speed = 10;
         maxLife = 80;
         life = maxLife;
-        attack = 2;
+        attack = 3;
         useCost = 1;
         alive = false;
         knockBackPower = 5;

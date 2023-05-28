@@ -34,6 +34,7 @@ public class Entity {
     public boolean collision = false;   
     public String dialogues[][] = new String[20][20]; 
     public Entity attacker;
+    public boolean temp = false;
    
     // STATE
     public int worldX, worldY;
@@ -54,6 +55,8 @@ public class Entity {
     public boolean transparent = false;
     public boolean offBalance = false;
     public boolean inRage = false;
+    public boolean sleep = false;
+    public boolean drawing = true;
     
     // COUNTER
     public int spriteCounter = 0;
@@ -254,7 +257,7 @@ public class Entity {
     }
     
     public void update(){
-        
+        if (sleep == false){
         if(knockBack == true){
             checkCollision();
             if(collisionOn == true){
@@ -324,6 +327,7 @@ public class Entity {
                 offBalance = false;
                 offBalanceCounter = 0;
             }
+        }
         }
     }
     public void checkAttackOrNot(int rate, int straight, int horizontal){
@@ -601,10 +605,7 @@ public class Entity {
                 }
                 break;
         }
-            
-            
-            
-              
+                 
             if(invincible == true){
                 hpBarOn = true;
                 hpBarCounter = 0;
@@ -613,9 +614,10 @@ public class Entity {
             if(dying == true){
                 dyingAnimation(g2);
             }
-            
-            g2.drawImage(image, tempScreenX, tempScreenY, null);
-            changeAlpha(g2, 1F);
+            if(drawing == true){
+                g2.drawImage(image, tempScreenX, tempScreenY, null);
+            }
+                changeAlpha(g2, 1F);          
         }
     }
     

@@ -65,13 +65,14 @@ public class GamePanel extends JPanel implements Runnable{
     Config config = new Config(this);
     public PathFinder pFinder = new PathFinder(this);
     SaveLoad saveLoad = new SaveLoad(this);
+    public CutsceneManager csManager = new CutsceneManager(this);
     Thread gameThread; 
     
     // ENTITY AND OBJECT
     public Player player = new Player(this,keyH);
-    public Entity obj[][] = new Entity[maxMap][20];
-    public Entity npc[][] = new Entity[maxMap][10];
-    public Entity monster[][] = new Entity[maxMap][20];
+    public Entity obj[][] = new Entity[maxMap][100];
+    public Entity npc[][] = new Entity[maxMap][200];
+    public Entity monster[][] = new Entity[maxMap][200];
     public ArrayList<Entity> projectileList = new ArrayList<>();
     ArrayList<Entity> entityList = new ArrayList<>();
     
@@ -86,6 +87,10 @@ public class GamePanel extends JPanel implements Runnable{
     public final int optionsState = 5;
     public final int gameOverState = 6;
     public final int tradeState = 7;
+    public final int cutscenceState = 11;
+    
+    // OTHERS
+    public boolean bossBattleOn = false;
     
     // AREA
     public int currentArea;
@@ -121,7 +126,10 @@ public class GamePanel extends JPanel implements Runnable{
         
     }
     public void resetGame(boolean restart){
+        stopMusic();
         player.setDefaultPositions();
+        removeTempEntity();
+        bossBattleOn = false;
         player.restoreStatus();
         aSetter.setNPC();
         aSetter.setMonster();
@@ -280,6 +288,9 @@ public class GamePanel extends JPanel implements Runnable{
             // EMPTY ENTITY LIST
             entityList.clear();
         
+            // CUTSCENE
+            csManager.draw(g2);
+            
             // UI
             ui.draw(g2);
             
@@ -325,6 +336,15 @@ public class GamePanel extends JPanel implements Runnable{
     public void playSE(int i){
         se.setFile(i);
         se.play();
+    }
+    public void removeTempEntity() {
+        for(int mapNum = 0; mapNum < maxMap; mapNum++){
+            for(int i = 0; i< obj[1].length;i++){
+                if(obj[mapNum][i] != null && obj[mapNum][i].temp == true){
+                    obj[mapNum][i] = null;
+                }
+            }
+        }
     }
 //    public void changeArea(){
 //        currentArea = nextArea;

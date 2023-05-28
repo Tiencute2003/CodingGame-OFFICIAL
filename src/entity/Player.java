@@ -56,8 +56,8 @@ public class Player extends Entity {
     public void setDefaultValues(){
         
         gp.currentMap = 0;
-        worldX = gp.tileSize *37;
-        worldY = gp.tileSize *8;
+        worldX = gp.tileSize *8;//25,34 map 5 // 23,22 map 0
+        worldY = gp.tileSize *6;
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";
@@ -89,8 +89,9 @@ public class Player extends Entity {
     }
     
     public void setDefaultPositions(){
-        worldX = gp.tileSize * 23;
-        worldY = gp.tileSize * 21;
+        gp.currentMap = 0;
+        worldX = gp.tileSize * 24;
+        worldY = gp.tileSize * 22;
         speed = 4;
         direction = "down";
     }
@@ -455,7 +456,9 @@ public class Player extends Entity {
             level++;
             nextLevelExp = nextLevelExp * 2 + 5;
             maxLife += 2;
-            maxMana ++;
+            if(level/2 == 0){
+            maxMana++;
+            }
             strength++;
             dexterity++;
             if(level/3 == 0){
@@ -609,9 +612,9 @@ public class Player extends Entity {
         if(transparent == true){
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
         }
-        
+        if(drawing == true){
         g2.drawImage(image, tempScreenX, tempScreenY, null);
-        
+        }
         // RESET ALPHA
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         

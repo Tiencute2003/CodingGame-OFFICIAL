@@ -44,6 +44,8 @@ public class UI {
     public int npcSlotRow = 0;
     int subState = 0;
     public Entity npc;
+    int charIndex = 0;
+    String combinedText = "";
     
     
     public UI(GamePanel gp){
@@ -326,11 +328,24 @@ public class UI {
         
         if(npc.dialogues[npc.dialogueSet][npc.dialogueIndex] != null){
             
-            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+//            currentDialogue = npc.dialogues[npc.dialogueSet][npc.dialogueIndex];
+
+            char characters[] = npc.dialogues[npc.dialogueSet][npc.dialogueIndex].toCharArray();
+            
+            if(charIndex < characters.length){
+                
+                String s = String.valueOf(characters[charIndex]);
+                combinedText = combinedText + s;
+                currentDialogue = combinedText;
+                charIndex++; 
+            }
             
             if(gp.keyH.enterPressed == true){
                 
-                if(gp.gameState == gp.dialogueState){
+                charIndex = 0;
+                combinedText = "";
+                
+                if(gp.gameState == gp.dialogueState || gp.gameState == gp.cutscenceState){
                     
                     npc.dialogueIndex++;
                     gp.keyH.enterPressed = false;
@@ -342,6 +357,9 @@ public class UI {
             
             if(gp.gameState == gp.dialogueState){
                 gp.gameState = gp.playState;
+            }
+            if(gp.gameState == gp.cutscenceState) {
+                gp.csManager.scenePhase++;
             }
         }
         

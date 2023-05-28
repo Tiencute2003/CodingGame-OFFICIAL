@@ -4,6 +4,7 @@
  */
 package monster;
 
+import ai.data.Progress;
 import entity.Entity;
 import java.util.Random;
 import main.GamePanel;
@@ -35,6 +36,7 @@ public class MON_SkeletonLord extends Entity{
         defense = 0;
         exp = 100;
         knockBackPower = 5;
+        sleep = true;
         
         int size = gp.tileSize * 5;
         solidArea.x = 48;
@@ -48,7 +50,7 @@ public class MON_SkeletonLord extends Entity{
         motion1_duration = 40;
         motion2_duration = 85;
         
-        
+        setDialogue();
         getImage();
         getAttackImage();
     }
@@ -101,7 +103,11 @@ public class MON_SkeletonLord extends Entity{
         attackRight2 = setup("/monster/skeletonlord_phase2_attack_right_2", gp.tileSize*i*2, gp.tileSize*i);
         }
     }
-    
+    public void setDialogue () {
+        dialogues[0][0] = "HOW DARE YOU!!!";
+        dialogues[0][1] = "You can not take my treasure!!!";
+        dialogues[0][2] = "ITS NOW YOUR END!!!";       
+    }
     public void setAction(){
         if(inRage == false && life < maxLife/2) {
             inRage = true;
@@ -130,18 +136,15 @@ public class MON_SkeletonLord extends Entity{
     
     public void checkDrop(){
         
-        // CAST A DIE
-        int i = new Random().nextInt(100)+1;
+        gp.bossBattleOn = false;
+        Progress.skeletonLordDefeated = true;
+        gp.stopMusic();
+        gp.playMusic(16);
         
-        // SET THE MONSTER DROP
-        if(i < 50){
-            dropItem(new OBJ_Coin_Bronze(gp));
-        }
-        if(i >= 50 && i < 75){
-            dropItem(new OBJ_Heart(gp));
-        }
-        if(i >= 75 && i < 100){
-            dropItem(new OBJ_ManaCrystal(gp));
+        for(int i = 0; i < gp.obj[1].length; i++) {
+            if(gp.obj[gp.currentMap][i] != null && gp.obj[gp.currentMap][i].name.equals("Door")) {
+                gp.obj[gp.currentMap][i] = null;
+            }
         }
     }
 }
