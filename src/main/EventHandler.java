@@ -86,8 +86,8 @@ public class EventHandler {
             
             else if(hit(0,24,22,"any") == true) { healingPool(gp.dialogueState); }
             else if(hit(0,12,32,"any") == true) { teleport(1,12,13); }
-//            else if(hit(1,12,13,"any") == true) { teleport(0,10,39); }
-//            else if(hit(1,12,9,"up") == true) { speak(gp.npc[1][0]);}
+            else if(hit(1,12,13,"any") == true) { teleport(0,12,32); }
+            else if(hit(1,12,9,"up") == true) { speak(gp.npc[1][0]);}
             else if(hit(0,5,4,"any") == true) { teleport(2,26,5); }
             else if(hit(2,26,5,"any") == true) { teleport(0,5,4); }
             else if(hit(2,24,4,"any") == true) { teleport(2,25,40); }
@@ -106,9 +106,9 @@ public class EventHandler {
             
             else if(hit(5,26,24,"up") == true) {skeletonLord();}//BOSS
             
-            else if(hit(5,25,6,"any") == true) { teleport(4,26,40); }
+            else if(hit(5,25,6,"any") == true) { teleport(4,26,44); }
             
-            else if(hit(5,26,6,"any") == true) { teleport(4,26,40); }
+            else if(hit(5,26,6,"any") == true) { teleport(4,26,44); }
         }
     }
     

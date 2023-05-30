@@ -56,19 +56,19 @@ public class Player extends Entity {
     public void setDefaultValues(){
         
         gp.currentMap = 0;
-        worldX = gp.tileSize *8;//25,34 map 5 // 23,22 map 0
-        worldY = gp.tileSize *6;
+        worldX = gp.tileSize *23;//25,34 map 5 // 23,22 map 0
+        worldY = gp.tileSize *22;
         defaultSpeed = 4;
         speed = defaultSpeed;
         direction = "down";
         
         // PLAYER STATUS
-        level = 1;
-        maxLife = 6;
+        level = 100;
+        maxLife = 10;
         life = maxLife;
         maxMana = 4;
         mana = maxMana;
-        strength = 1; // the more strength, the more damage given
+        strength = 100; // the more strength, the more damage given
         dexterity = 1; // the more dexterity, the less damage taken
         exp = 0;
         nextLevelExp = 5;
