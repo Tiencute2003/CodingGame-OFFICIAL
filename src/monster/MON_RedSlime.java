@@ -27,11 +27,11 @@ public class MON_RedSlime extends Entity{
         name = "Red Slime";
         defaultSpeed = 1;
         speed = defaultSpeed;
-        maxLife = 8;
+        maxLife = 20;
         life = maxLife;
         attack = 6;
         defense = 2;
-        exp = 2;
+        exp = 7;
         projectile = new OBJ_Rock(gp);
         
         solidArea.x = 4;

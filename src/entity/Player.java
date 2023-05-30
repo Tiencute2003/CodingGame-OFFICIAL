@@ -63,12 +63,12 @@ public class Player extends Entity {
         direction = "down";
         
         // PLAYER STATUS
-        level = 100;
-        maxLife = 10;
+        level = 1;
+        maxLife = 8;
         life = maxLife;
         maxMana = 4;
         mana = maxMana;
-        strength = 100; // the more strength, the more damage given
+        strength = 1; // the more strength, the more damage given
         dexterity = 1; // the more dexterity, the less damage taken
         exp = 0;
         nextLevelExp = 5;
@@ -456,14 +456,11 @@ public class Player extends Entity {
             level++;
             nextLevelExp = nextLevelExp * 2 + 5;
             maxLife += 2;
-            if(level/2 == 0){
+            if(level%3 == 0){
             maxMana++;
             }
             strength++;
             dexterity++;
-            if(level/3 == 0){
-            defaultSpeed++;
-            }
             attack = getAttack();
             defense = getDefense();
             

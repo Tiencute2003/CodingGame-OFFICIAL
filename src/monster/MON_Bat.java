@@ -35,11 +35,11 @@ public class MON_Bat extends Entity{
         name = "Bat";
         defaultSpeed = 4;
         speed = defaultSpeed;
-        maxLife = 6;
+        maxLife = 10;
         life = maxLife;
         attack = 4;
         defense = 0;
-        exp = 5;
+        exp = 4;
         projectile = new OBJ_Rock(gp);
         
         solidArea.x = 3;
