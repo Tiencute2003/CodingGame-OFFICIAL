@@ -45,7 +45,13 @@ The Land of Fantasy is the name of our game. For those who have never played a Q
 
   
 #### Map04 
-*(mentioned in demo offline)*
+![image](https://github.com/phuongthanhkkk/2DGAME/assets/91307850/589b4fdb-0b70-4317-8168-d37f507961e9)
+![image](https://github.com/phuongthanhkkk/2DGAME/assets/91307850/ef106a16-97bb-4204-8789-84986611e63a)
+
+  
+#### Map05
+![image](https://github.com/phuongthanhkkk/2DGAME/assets/91307850/c307c0aa-18c0-44f6-8c0e-6c9e8dabbf53)
+![image](https://github.com/phuongthanhkkk/2DGAME/assets/91307850/afed603e-3cc0-42a0-91cf-dfc12d0d89fa)
   
   
 ### 📑 UML Diagram
